@@ -20,6 +20,7 @@ export const STYLE = {
         blue: '#299DED',
         white: '#FFFFFF',
         grey: '#303539',
+        lightGrey: '#606365',
     },
     breakpoints: {
         desktop: '1200px',

@@ -4,7 +4,9 @@ import styled from 'styled-components';
 import { Container, Flex, Text } from '../components/common/style';
 import axios from 'axios';
 import Preloader, { PreloaderWrapper } from '../components/common/Preloader';
-import Rating from '../components/common/Rating';
+import Rating from '../components/Rating';
+import { STYLE } from '../settings';
+import Comments from '../components/Comments';
 
 const MovieWrapper = styled.div`
     width: 100%;
@@ -46,6 +48,7 @@ const Genre = styled.span`
     position: relative;
     padding-right: 2.7rem; 
     margin-left: 2rem; 
+    user-select: none;
 
     &::before {
         content: "";
@@ -55,9 +58,15 @@ const Genre = styled.span`
         transform: translate(0, -50%);
         width: 1.3rem;
         height: 1.3rem;
-        background-color: #606365;
-        border-radius: 50%;
-        
+        background-color: ${STYLE.colors.lightGrey};
+        border-radius: 50%;  
+        transition: background-color .3s ease;
+    }
+
+    &:hover {
+        &::before {
+            background-color: ${STYLE.colors.blue};
+        }
     }
 `;
 
@@ -127,6 +136,14 @@ const Movie = ({  ...props }) => {
                                 size={2}
                                 lineHeight={23.44}
                             >{movie.description_full}</Text>
+                        </div>
+                        <div>
+                            <Subtitle
+                                as='h2'
+                            >Comments</Subtitle>
+                            <Comments 
+                                id={params.movieId}
+                            />
                         </div>
                     </MovieBody>
                 </Flex> : <PreloaderWrapper>

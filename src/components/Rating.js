@@ -1,11 +1,7 @@
 import styled from "styled-components";
-import starBlue from '../../assets/images/star-blue.svg';
-import starGrey from '../../assets/images/star-grey.svg';
-import { Text, Flex } from './style';
-
-const RatingWrapper = styled(Flex)`
-    cursor: pointer;
-`;
+import starBlue from '../assets/images/star-blue.svg';
+import starGrey from '../assets/images/star-grey.svg';
+import { Text, Flex } from './common/style';
 
 const Stars = styled.div`
     margin-right: .6rem;
@@ -17,7 +13,7 @@ const Star = styled.img`
 
 const Rating = ({ value }) => {
     return (
-        <RatingWrapper
+        <Flex
             align='center'
         >
             <Stars>
@@ -32,7 +28,7 @@ const Rating = ({ value }) => {
                 size={2.5}
                 lineHeigth={29.3}
             >{value}</Text>
-        </RatingWrapper>
+        </Flex>
     )
 }
 

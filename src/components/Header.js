@@ -34,7 +34,6 @@ const Button = styled.button`
 
 const Header = (props) => {
     const history = useHistory();
-    console.log(history)
     return (
         <HeadeWrapper>
             <Container>
