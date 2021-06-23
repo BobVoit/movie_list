@@ -32,7 +32,7 @@ class App extends React.Component {
         <Wrapper>
           <Header />
           <Main>
-            <Redirect from="/" to={paths.movies} />
+            <Route exact path="/" render={() => <Redirect to={paths.movies} />} />
             <Route exact path={paths.movies} render={() => <Movies />} />
             <Route path={paths.movie.fullname} render={() => <Movie />} />
           </Main>

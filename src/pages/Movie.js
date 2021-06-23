@@ -5,7 +5,7 @@ import { Container, Flex, Text } from '../components/common/style';
 import axios from 'axios';
 import Preloader, { PreloaderWrapper } from '../components/common/Preloader';
 import Rating from '../components/Rating';
-import { STYLE } from '../settings';
+import { STYLE, BASE_SETTINGS} from '../settings';
 import Comments from '../components/Comments';
 
 const MovieWrapper = styled.div`
@@ -26,11 +26,29 @@ const Poster = styled.div`
         width: 100%;
         border-radius: 20px;
     }
+
+    @media (max-width: ${BASE_SETTINGS.breakpoints.tablet}) {
+        width: auto;
+        margin: 0 5rem;
+    }
+`;
+
+const Box = styled.div`
+    display: flex;
+
+    @media (max-width: ${BASE_SETTINGS.breakpoints.tablet}) {
+        display: block;
+    }
 `;
 
 const MovieBody = styled.div`
     width: 60%;
     margin-left: 3.1rem;
+
+    @media (max-width: ${BASE_SETTINGS.breakpoints.tablet}) {
+        width: auto;
+        margin: 2rem 1rem 0;
+    }
 `;
 
 const Subtitle = styled.div`
@@ -70,14 +88,13 @@ const Genre = styled.span`
     }
 `;
 
-const Movie = ({  ...props }) => {
+const Movie = ({ }) => {
     const params = useParams();
     const [movie, setMovie] = useState(null);
     const [loaded, setLoaded] = useState(true);
     useEffect(() => {
         axios.get(`https://yts.mx/api/v2/movie_details.json?movie_id=${params.movieId}`)
             .then(response => {
-                console.log('response');
                 setLoaded(true)
                 const { status } = response.data;
                 if (status === 'ok') {
@@ -86,11 +103,14 @@ const Movie = ({  ...props }) => {
                     setLoaded(false);
                 }
             })
+        return () => {
+            setMovie(null); 
+        }
     }, []);
     return (
         <MovieWrapper>
             <MovieContainer>
-                {!loaded ? <Flex>
+                {!loaded ? <Box>
                     <Poster>
                         <img 
                             src={movie.large_cover_image}
@@ -146,7 +166,7 @@ const Movie = ({  ...props }) => {
                             />
                         </div>
                     </MovieBody>
-                </Flex> : <PreloaderWrapper>
+                </Box> : <PreloaderWrapper>
                     <Preloader />
                 </PreloaderWrapper>}
             </MovieContainer>

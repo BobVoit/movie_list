@@ -1,8 +1,8 @@
 import React from "react";
 import { useHistory, withRouter } from "react-router";
 import styled from "styled-components";
-import { STYLE } from "../settings";
-import { Container, Flex } from "./common/style";
+import { STYLE, BASE_SETTINGS } from "../settings";
+import { Container, Flex, Text } from "./common/style";
 
 const HeadeWrapper = styled.header`
     width: 100%;
@@ -28,7 +28,11 @@ const Button = styled.button`
     transition: box-shadow .3s ease;
 
     &:hover {
-        box-shadow: 0px 1px 15px 1px rgba(255, 255, 255, 0.2);
+        box-shadow: 2px 2px 5px 1px rgba(255, 255, 255, 0.2);
+    }
+
+    @media (max-width: ${BASE_SETTINGS.breakpoints.mobile}) {
+        font-size: 2.2rem;
     }
 `;
 
@@ -39,8 +43,15 @@ const Header = (props) => {
             <Container>
                 <Flex
                     align='center'
+                    justify='space-between'
                     height='100%'
                 >
+                    <Text
+                        as='h1'
+                        style={{ userSelect: 'none' }}
+                        weight={500}
+                        size={2.8}
+                    >Movies</Text>
                     <Button
                         onClick={history.goBack}
                     >Back</Button>

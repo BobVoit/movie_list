@@ -2,12 +2,17 @@
 export const BASE_SETTINGS = {
     url: 'http://localhost:3000',
     paths: {
-        movies: '/movies',
+        movies: '/movies/',
         movie: {
             fullname: '/movies/movie/:movieId?',
             basename: '/movies/movie/'
         }
     },
+    breakpoints: {
+        desktop: '1200px',
+        tablet: '769px',
+        mobile: '440px'
+    }
 }
 
 export const STYLE = {

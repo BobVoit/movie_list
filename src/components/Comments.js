@@ -24,13 +24,13 @@ const Comments = ({ id }) => {
 
     const addComment = (value) => {
         const element = comments.find(comment => comment.filmId == id);
-        const data = {
-            id: comments.length + 1,
-            date: getCurrentDate(),
-            author: 'You',
-            value
-        }
         if (element) {
+            const data = {
+                id: element.comments.length + 1,
+                date: getCurrentDate(),
+                author: 'You',
+                value
+            }
             setComments((comments) => {
                 return comments.map((comment) => {
                     if (comment.filmId == id) {
@@ -43,11 +43,16 @@ const Comments = ({ id }) => {
                 })
             })
         } else {
+            const data = {
+                id: 1,
+                date: getCurrentDate(),
+                author: 'You',
+                value
+            }
             setComments((comments) => [...comments, { filmId: id, comments: [data] }]);
         }
     }
 
-    console.log(commentsValue);
     return (
         <ComponentWrapper>
             <Form 

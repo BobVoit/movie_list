@@ -6,7 +6,6 @@ import MovieItem from '../components/MovieItem';
 import Preloader, { PreloaderWrapper } from '../components/common/Preloader';
 import { withRouter } from 'react-router';
 import Paginations from '../components/Pagination';
-import emptyPoster from '../assets/images/empty-poster.jpg';
 
 const MoviesListWrapper = styled.div`
     width: 100%;
