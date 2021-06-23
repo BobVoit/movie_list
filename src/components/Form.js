@@ -56,6 +56,7 @@ const Form = ({ action }) => {
         onSubmit: values => {
             if (values.comment) {
                 action(values.comment);
+                values.comment = '';
             }
         }
     });

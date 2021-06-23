@@ -12,12 +12,21 @@ const ComponentWrapper = styled.div`
 
 const Comments = ({ id }) => {
     const [comments, setComments] = useLocalStorage('comments', []);
+    const [commentsValue, setCommentsValue] = useState([]);
+
+
+    useEffect(() => {
+        setCommentsValue(() => {
+            const arrayComments = comments.find(comment => comment.filmId == id);
+            return arrayComments ? arrayComments.comments : [];
+        })
+    }, [comments]);
 
     const addComment = (value) => {
         const element = comments.find(comment => comment.filmId == id);
         const data = {
             id: comments.length + 1,
-            date: getCurrentDate,
+            date: getCurrentDate(),
             author: 'You',
             value
         }
@@ -34,20 +43,22 @@ const Comments = ({ id }) => {
                 })
             })
         } else {
-            setComments((comments) => [...comments, { filmId: id, comments: data }]);
+            setComments((comments) => [...comments, { filmId: id, comments: [data] }]);
         }
     }
-    
+
+    console.log(commentsValue);
     return (
         <ComponentWrapper>
             <Form 
                 action={addComment}
             />
-            {comments.map((comment) => comment.fildId == id ? <Comment 
-                key={comment.filmId} 
-                date={comment.id}
-                comment={comment}
-            /> : null)}
+            {commentsValue.map((comment) => <Comment 
+                key={comment.id} 
+                date={comment.date}
+                comment={comment.value}
+                author={comment.author}
+            />)}
         </ComponentWrapper>
     )
 }

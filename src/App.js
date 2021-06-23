@@ -4,6 +4,7 @@ import { compose } from "redux";
 import styled from "styled-components";
 import {
   BrowserRouter as Router,
+  HashRouter,
   Route,
   Redirect
 } from 'react-router-dom';
@@ -31,7 +32,7 @@ class App extends React.Component {
         <Wrapper>
           <Header />
           <Main>
-            <Redirect to={paths.movies} />
+            <Redirect from="/" to={paths.movies} />
             <Route exact path={paths.movies} render={() => <Movies />} />
             <Route path={paths.movie.fullname} render={() => <Movie />} />
           </Main>
@@ -46,11 +47,11 @@ let AppContainer = compose(
 
 const MainApp = () => {
   return (
-    <Router>
+    <HashRouter>
       <Reset />
       <BaseStyle />
       <AppContainer />
-    </Router>
+    </HashRouter>
   )
 }
 
